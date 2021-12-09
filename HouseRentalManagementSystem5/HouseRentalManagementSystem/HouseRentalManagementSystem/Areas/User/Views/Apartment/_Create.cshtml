@@ -1,0 +1,157 @@
+﻿<form>
+    <div class="col-md-12 mx-auto">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group mb-3">
+            <label class="form-label">Building Name</label>
+            <select ng-model="newApartment.BuildingId" ng-change="FillDropDownValue()" class="form-control">
+                <option value="">Choose...</option>
+                <option ng-repeat="item in buildings" value="{{item.BuildingId}}">
+                    {{item.BuildingShortName}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Type</label>
+            <select ng-model="newApartment.AptTypeCode" ng-change="FillDropDownValue()" class="form-control">
+                <option value="">Choose...</option>
+                <option ng-repeat="item in types" value="{{item.AptTypeCode}}">
+                    {{item.AptTypeDescription}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Name</label>
+            <input ng-model="newApartment.ApartmentName" class="form-control" />
+        </div>
+        <!--<div class="form-group mb-3">
+            <label class="form-label">Apartment Facility</label>
+            <div class="card">
+                <ul class="ks-cboxtags">-->
+                    @*<li ng-repeat="item in types">
+                        <input type="checkbox" id="item.FacilityCode" value="{{item.FacilityCode}}" name="FacilityCode">
+                        <label for="@item.FacilityCode">@item.FacilityDescription</label>
+                    </li>*@
+                    <!--<li ng-repeat="item in facilities">
+                        <input type="checkbox" ng-model="AllFacilityCode.FacilityCode[item.FacilityCode]" value="{{item.FacilityCode}}" id="{{item.FacilityCode}}" >
+                        <label for="{{item.FacilityCode}}">{{item.FacilityDescription}}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+        <div class="form-group mb-3">
+            <label class="form-label">Bathroom Count</label>
+            <input type="number" ng-model="newApartment.BathroomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Bedroom Count</label>
+            <input type="number" ng-model="newApartment.BedroomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Room Count</label>
+            <input type="number" ng-model="newApartment.RoomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Monthly Rent</label>
+            <input type="number" ng-model="newApartment.MonthlyRent" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Security DepositAmount</label>
+            <input type="number" ng-model="newApartment.SecurityDepositAmount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Other Apartment Details</label>
+            <textarea ng-model="newApartment.OtherApartmentDetails" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)"></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <div class="d-flex flex-wrap justify-content-start" id="container">
+            </div>
+            <input type="file" id="Photos" multiple="" class="d-none" onchange="image_select()" ngf-select="UploadFiles($files)">
+            <button class="btn btn_modal_close" type="button" onclick="document.getElementById('Photos').click()">Choose Images</button>
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Create" class="btn btn_modal" ng-click="Insert()" onclick="CreateClearAll()"  data-bs-dismiss="modal"/>
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn_modal_close" />
+        </div>
+    </div>
+</form>
+<script>
+
+    var images = [];
+    // this function will select images
+    function image_select() {
+        var image = document.getElementById('Photos').files;
+        for (i = 0; i < image.length; i++) {
+            if (check_duplicate(image[i].name)) {
+                images.push({
+                    "name": image[i].name,
+                    "url": URL.createObjectURL(image[i]),
+                    "file": image[i],
+                })
+            } else {
+                alert(image[i].name + " is already added to the list");
+            }
+        }
+
+        //document.getElementById('form').reset();
+        document.getElementById('container').innerHTML = image_show();
+    }
+    // this function will show images in the DOM
+    function image_show() {
+        var image = "";
+        images.forEach((i) => {
+            image += `<div class="image_container d-flex justify-content-center position-relative">
+                   <img src="`+ i.url + `" alt="Image">
+                   <span class="position-absolute" onclick="delete_image(`+ images.indexOf(i) + `)">&times;</span>
+              </div>`;
+        })
+        return image;
+    }
+
+    // this function will get all images from the array
+    function get_image_data() {
+        var form = new FormData()
+        for (let index = 0; index < images.length; index++) {
+            form.append("file[" + index + "]", images[index]['file']);
+        }
+        return form;
+    }
+
+    // this function will delete a specific image from the container
+    function delete_image(index) {
+        var attachments = document.getElementById('Photos').files;
+        var fileBuffer = new DataTransfer();
+
+        // append the file list to an array iteratively
+        for (let i = 0; i < attachments.length; i++) {
+            // Exclude file in specified index
+            if (index !== i)
+                fileBuffer.items.add(attachments[i]);
+        }
+
+        // Assign buffer to file input
+        document.getElementById("Photos").files = fileBuffer.files;
+
+        images.splice(index, 1);
+        document.getElementById('container').innerHTML = image_show();
+    }
+
+    // this function will check duplicate images
+    function check_duplicate(name) {
+        var image = true;
+        if (images.length > 0) {
+            for (e = 0; e < images.length; e++) {
+                if (images[e].name == name) {
+                    image = false;
+                    break;
+                }
+            }
+        }
+        return image;
+    }
+    function CreateClearAll() {
+        $("#Photos").val("");
+        images = [];
+        image_show();
+        delete_image();
+    }
+</script>

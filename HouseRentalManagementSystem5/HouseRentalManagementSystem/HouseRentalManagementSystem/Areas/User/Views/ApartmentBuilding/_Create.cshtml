@@ -1,0 +1,57 @@
+﻿<form class="form-horizontal">
+    <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">Add New Building</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Short Name</label>
+                    <input ng-model="newBuilding.BuildingShortName" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Full Name</label>
+                    <input ng-model="newBuilding.BuildingFullName" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Description</label>
+                    <textarea ng-model="newBuilding.BuildingDescription" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)"></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Address</label>
+                    <input ng-model="newBuilding.BuildingAddress" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Manager</label>
+                    <input ng-model="newBuilding.BuildingManager" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Building Phone</label>
+                    <input ng-model="newBuilding.BuildingPhone" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Other Building Details</label>
+                    <textarea ng-model="newBuilding.OtherBuildingDetails" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)"></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label mb-3">Building Photo</label>
+                    <img src="~/images/app_images/no-image.png" style="height:90px!important; width:auto!important;" class="form-control change_edit mb-3" asp-append-version="true" />
+                    <input class="form-control change_image" type="file" ngf-select="UploadFiles($files)" required />
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-12">
+            <button id="addModelButton" type="button" class="btn btn_modal">Add more product</button>
+        </div>
+        <input id="sl" type="hidden" value="0" />*@
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12">
+            <input type="submit" value="Save" class="btn btn_modal" data-bs-dismiss="modal" ng-click="Insert()" />
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn_modal_close" />
+        </div>
+    </div>
+</form>
+<script src="~/Custom/js/main.js"></script>

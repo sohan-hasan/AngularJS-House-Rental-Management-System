@@ -1,0 +1,149 @@
+﻿<form>
+    <div class="col-md-12 mx-auto">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group mb-3">
+            <label class="form-label">Building Name</label>
+            <select ng-model="clickedApartment.BuildingId" class="form-control" ng-options="value.BuildingId as value.BuildingShortName for (key, value) in buildings">
+            <option ng-repeat="item in buildings" value="{{item.BuildingId}}" ng-selected="clickedApartment.BuildingId == item.BuildingId">
+                {{item.BuildingShortName}}
+            </option>
+        </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Type</label>
+            <select ng-model="clickedApartment.AptTypeCode" class="form-control" ng-options="value.AptTypeCode as value.AptTypeDescription for (key, value) in types">
+                <option ng-repeat="item in types" value="{{item.AptTypeCode}}"  ng-selected="clickedApartment.AptTypeCode == item.AptTypeCode">
+                    {{item.AptTypeDescription}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Name</label>
+            <input ng-model="clickedApartment.ApartmentName" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Bathroom Count</label>
+            <input type="number" ng-model="clickedApartment.BathroomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Bedroom Count</label>
+            <input type="number" ng-model="clickedApartment.BedroomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Room Count</label>
+            <input type="number" ng-model="clickedApartment.RoomCount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Monthly Rent</label>
+            <input type="number" ng-model="clickedApartment.MonthlyRent" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Security DepositAmount</label>
+            <input type="number" ng-model="clickedApartment.SecurityDepositAmount" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Other Apartment Details</label>
+            <textarea ng-model="clickedApartment.OtherApartmentDetails" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)"></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label mb-3">Apartment Images</label>
+            <div class="d-flex flex-wrap justify-content-start">
+                <div class="image_container d-flex justify-content-center position-relative" ng-repeat="item in images">
+                    <img ng-src="/images/apartment_images/{{item.ImageName}}" alt="Image">
+                    <a class="position-absolute btn_delete_images" ng-click='DeleteImages(item.ImageId)' onclick="return confirm('Are you sure to delete?')">&times;</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <div class="d-flex flex-wrap justify-content-start" id="edit_container">
+            </div>
+            <input type="file" id="Edit_Photos" multiple="" class="d-none" onchange="edit_image_select()" ngf-select="UploadFiles($files)">
+            <button class="btn btn_modal_close" type="button" onclick="document.getElementById('Edit_Photos').click()">Choose Images</button>
+        </div>
+        <div class="form-group mb-3">
+            <input type="submit" value="Update" class="btn btn_modal" ng-click="UpdateApartment()" data-bs-dismiss="modal" onclick="clearAll()" />
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn_modal_close" />
+        </div>
+    </div>
+</form>
+<script>
+
+    var editimages = [];
+    // this function will select images
+    function edit_image_select() {
+        var image = document.getElementById('Edit_Photos').files;
+        for (i = 0; i < image.length; i++) {
+            if (check_duplicate_edit(image[i].name)) {
+                editimages.push({
+                    "name": image[i].name,
+                    "url": URL.createObjectURL(image[i]),
+                    "file": image[i],
+                })
+            } else {
+                alert(image[i].name + " is already added to the list");
+            }
+        }
+
+        /*document.getElementById('form').reset();*/
+        document.getElementById('edit_container').innerHTML = edit_image_show();
+    }
+    // this function will show images in the DOM
+    function edit_image_show() {
+        var image = "";
+        editimages.forEach((i) => {
+            image += `<div class="image_container d-flex justify-content-center position-relative">
+                   <img src="`+ i.url + `" alt="Image">
+                   <span class="position-absolute" onclick="edit_delete_image(`+ editimages.indexOf(i) + `)">&times;</span>
+              </div>`;
+        })
+        return image;
+    }
+
+    // this function will get all images from the array
+    function get_image_data() {
+        var form = new FormData()
+        for (let index = 0; index < editimages.length; index++) {
+            form.append("file[" + index + "]", editimages[index]['file']);
+        }
+        return form;
+    }
+
+    // this function will delete a specific image from the container
+    function edit_delete_image(index) {
+        var attachments = document.getElementById('Edit_Photos').files;
+        var fileBuffer = new DataTransfer();
+
+        // append the file list to an array iteratively
+        for (let i = 0; i < attachments.length; i++) {
+            // Exclude file in specified index
+            if (index !== i)
+                fileBuffer.items.add(attachments[i]);
+        }
+
+        // Assign buffer to file input
+        document.getElementById("Edit_Photos").files = fileBuffer.files;
+
+        editimages.splice(index, 1);
+        document.getElementById('edit_container').innerHTML = edit_image_show();
+    }
+
+    // this function will check duplicate images
+    function check_duplicate_edit(name) {
+        var image = true;
+        if (editimages.length > 0) {
+            for (e = 0; e < editimages.length; e++) {
+                if (editimages[e].name == name) {
+                    image = false;
+                    break;
+                }
+            }
+        }
+        return image;
+    }
+    function clearAll() {
+        $("#Edit_Photos").val("");
+        editimages = [];
+        edit_image_show();
+        edit_delete_image();
+    }
+</script>

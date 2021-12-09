@@ -1,0 +1,43 @@
+﻿<div class="row">
+    <div class="col-md-12 mx-auto">
+        <form class="form-horizontal">
+            <input type="hidden" ng-model="clickedBuilding.BuildingId" />
+            <input type="hidden" ng-model="clickedBuilding.ImageName" />
+            <div class="form-group mb-3">
+                <label class="form-label">Building Short Name</label>
+                <input ng-model="clickedBuilding.BuildingShortName" class="form-control" readonly/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Building Full Name</label>
+                <input ng-model="clickedBuilding.BuildingFullName" class="form-control" readonly/>
+            </div>
+            <div class="form-group position-relative mb-3">
+                <label class="form-label">Building Description</label>
+                <textarea ng-model="clickedBuilding.BuildingDescription" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)" readonly></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Building Address</label>
+                <input ng-model="clickedBuilding.BuildingAddress" class="form-control" readonly/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Building Manager</label>
+                <input ng-model="clickedBuilding.BuildingManager" class="form-control" readonly/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Building Phone</label>
+                <input ng-model="clickedBuilding.BuildingPhone" class="form-control" readonly/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Other Building Details</label>
+                <textarea ng-model="clickedBuilding.OtherBuildingDetails" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)" readonly></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label mb-3">Building Photo</label>
+                <img ng-src="/images/building_images/{{clickedBuilding.ImageName}}" style="height:90px!important; width:auto!important;" class="form-control change_edit mb-3" asp-append-version="true" />
+            </div>
+            <div class="form-group mb-3">
+                <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn_modal_close" />
+            </div>
+        </form>
+    </div>
+</div>

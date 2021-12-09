@@ -1,0 +1,61 @@
+﻿<form>
+    <div class="col-md-12 mx-auto">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group mb-3">
+            <label class="form-label">Building Name</label>
+            <select ng-model="clickedApartment.BuildingId" class="form-control" ng-options="value.BuildingId as value.BuildingShortName for (key, value) in buildings" disabled>
+                <option ng-repeat="item in buildings" value="{{item.BuildingId}}" ng-selected="clickedApartment.BuildingId == item.BuildingId">
+                    {{item.BuildingShortName}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Type</label>
+            <select ng-model="clickedApartment.AptTypeCode" class="form-control" ng-options="value.AptTypeCode as value.AptTypeDescription for (key, value) in types" disabled>
+                <option ng-repeat="item in types" value="{{item.AptTypeCode}}" ng-selected="clickedApartment.AptTypeCode == item.AptTypeCode">
+                    {{item.AptTypeDescription}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Apartment Name</label>
+            <input ng-model="clickedApartment.ApartmentName" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Bathroom Count</label>
+            <input type="number" ng-model="clickedApartment.BathroomCount" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Bedroom Count</label>
+            <input type="number" ng-model="clickedApartment.BedroomCount" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Room Count</label>
+            <input type="number" ng-model="clickedApartment.RoomCount" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Monthly Rent</label>
+            <input type="number" ng-model="clickedApartment.MonthlyRent" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Security DepositAmount</label>
+            <input type="number" ng-model="clickedApartment.SecurityDepositAmount" class="form-control" disabled/>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Other Apartment Details</label>
+            <textarea ng-model="clickedApartment.OtherApartmentDetails" class="form-control" text-wrap:normal" type="text" placeholder="Write here (Optional)" disabled></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label mb-3">Apartment Images</label>
+            <div class="d-flex flex-wrap justify-content-start">
+                <div class="image_container d-flex justify-content-center position-relative" ng-repeat="item in images">
+                    <img ng-src="/images/apartment_images/{{item.ImageName}}" alt="Image">
+                    <a class="position-absolute btn_delete_images" ng-click='DeleteImages(item.ImageId)' onclick="return confirm('Are you sure to delete?')">&times;</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <input type="button" value="Close" data-bs-dismiss="modal" class="btn btn_modal_close" />
+        </div>
+    </div>
+</form>
