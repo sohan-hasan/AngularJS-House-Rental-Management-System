@@ -469,6 +469,10 @@ F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSyst
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.runtimeconfig.json
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.runtimeconfig.dev.json
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.dll
+<<<<<<< HEAD
+=======
+F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\ref\HouseRentalManagementSystem.dll
+>>>>>>> c1617f70baa2dcc041910fadf48079968d2ab888
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.pdb
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.Views.dll
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\bin\Debug\net5.0\HouseRentalManagementSystem.Views.pdb
@@ -690,4 +694,7 @@ F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSyst
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\obj\Debug\net5.0\HouseRentalManagementSystem.pdb
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\obj\Debug\net5.0\HouseRentalManagementSystem.genruntimeconfig.cache
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\obj\Debug\net5.0\HouseRentalManagementSystem.csproj.CopyComplete
+<<<<<<< HEAD
 F:\Repository\AngularJS-House-Rental-Management-System\HouseRentalManagementSystem5\HouseRentalManagementSystem\HouseRentalManagementSystem\obj\Debug\net5.0\refint\HouseRentalManagementSystem.dll
+=======
+>>>>>>> c1617f70baa2dcc041910fadf48079968d2ab888

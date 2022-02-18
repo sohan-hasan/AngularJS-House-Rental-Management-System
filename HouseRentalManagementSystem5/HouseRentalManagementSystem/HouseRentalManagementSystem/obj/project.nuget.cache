@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "WZalmwYSB6P+MGPqfSemJC66B8z1oKHU6GO3FtsHQxgobEpiRrnV+3pYt8FzWGU6LFyP0UbZIt7FddECbctdQg==",
+=======
+  "dgSpecHash": "W7JAdg2nhBYWG2wsuEAjvHN8IQnKlecaXYio5Tx2byzJaM1axo4369smGTRpQ+pmCRMVnRIc1qBSaxGQya5QSg==",
+>>>>>>> c1617f70baa2dcc041910fadf48079968d2ab888
   "success": true,
   "projectFilePath": "F:\\Repository\\AngularJS-House-Rental-Management-System\\HouseRentalManagementSystem5\\HouseRentalManagementSystem\\HouseRentalManagementSystem\\HouseRentalManagementSystem.csproj",
   "expectedPackageFiles": [
